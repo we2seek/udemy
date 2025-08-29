@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet" media="screen"/>
+    <title>Error</title>
+</head>
+<body>
+<div class="container">
+    <div class="my-5">
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Oops! Something went wrong</h4>
+            <span th:text="${statusCode}">Code</span>
+            <span th:text="${message}">Error message</span>
+            <hr>
+            <a href="/" class="btn btn-outline-danger">Back to Home</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

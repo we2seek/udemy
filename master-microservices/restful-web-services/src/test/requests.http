@@ -1,0 +1,63 @@
+### get all
+#@no-cookie-jar
+#@no-redirect
+#@no-log
+GET http://localhost:8080/api/users
+Accept: application/json
+
+### get one
+#@no-cookie-jar
+#@no-redirect
+#@no-log
+GET http://localhost:8080/api/users/100500
+Accept: application/json
+
+### create
+#@no-cookie-jar
+#@no-log
+POST http://localhost:8080/api/users
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Chuck Norris",
+  "birthDate": "2025-07-15"
+}
+
+### update
+#@no-cookie-jar
+#@no-redirect
+#@no-log
+PUT http://localhost:8080/api/users/1
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Chuck Norris (updated)",
+  "birthDate": "2025-08-08"
+}
+
+### delete
+#@no-cookie-jar
+#@no-redirect
+#@no-log
+DELETE http://localhost:8080/api/users/5
+Content-Type: application/json
+Accept: application/json
+
+### posts: get all by user
+#@no-cookie-jar
+#@no-redirect
+#@no-log
+GET http://localhost:8080/api/users/1/posts
+Accept: application/json
+
+### posts: create by user
+#@no-cookie-jar
+#@no-redirect
+#@no-log
+POST http://localhost:8080/api/users/1/posts
+Accept: application/json
+Content-Type: application/json
+
+{"description": "А це вже зовсім інша справа. Пост кирилицею! 😎"}

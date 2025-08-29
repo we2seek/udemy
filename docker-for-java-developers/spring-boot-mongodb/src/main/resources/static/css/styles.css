@@ -1,0 +1,11 @@
+body {
+    font-family: sans-serif;
+}
+
+td > a {
+    display: block;
+    max-width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

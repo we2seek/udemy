@@ -1,0 +1,27 @@
+### Request all items
+# @no-log
+# @no-redirect
+# @no-cookie-jar
+GET {{base_url}}/api/item
+Accept: application/json
+
+### Request singe item
+# @no-log
+# @no-redirect
+# @no-cookie-jar
+GET {{base_url}}/api/item/1002
+Accept: application/json
+
+### Create new item
+POST {{base_url}}/api/item
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Новий елемент",
+  "active": false
+}
+
+### Delete item
+DELETE {{base_url}}/api/item/102
+Accept: application/json
