@@ -5,8 +5,8 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <!--        <version>3.5.4</version>-->
-        <version>3.0.6</version>
+        <version>3.5.4</version>
+        <!--        <version>3.0.6</version>-->
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.we2seek.demo</groupId>
@@ -29,8 +29,8 @@
     </scm>
     <properties>
         <java.version>17</java.version>
-        <!--        <spring-cloud.version>2025.0.0</spring-cloud.version>-->
-        <spring-cloud.version>2022.0.0</spring-cloud.version>
+        <spring-cloud.version>2025.0.0</spring-cloud.version>
+        <!--        <spring-cloud.version>2022.0.0</spring-cloud.version>-->
     </properties>
     <dependencies>
         <dependency>
@@ -55,41 +55,41 @@
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
-        <!-- SB3 :  Micrometer
-            > OpenTelemetry
-            > Zipkin
-        -->
+        <!--        &lt;!&ndash; SB3 :  Micrometer-->
+        <!--            > OpenTelemetry-->
+        <!--            > Zipkin-->
+        <!--        &ndash;&gt;-->
 
-        <!-- Micrometer - Vendor-neutral application observability facade.
-            Instrument your JVM-based application code without vendor lock-in.
-            Observation (Metrics & Logs) + Tracing.
-        -->
+        <!--        &lt;!&ndash; Micrometer - Vendor-neutral application observability facade.-->
+        <!--            Instrument your JVM-based application code without vendor lock-in.-->
+        <!--            Observation (Metrics & Logs) + Tracing.-->
+        <!--        &ndash;&gt;-->
 
-        <dependency>
-            <groupId>io.micrometer</groupId>
-            <artifactId>micrometer-observation</artifactId>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>io.micrometer</groupId>-->
+        <!--            <artifactId>micrometer-observation</artifactId>-->
+        <!--        </dependency>-->
 
-        <!-- OPTION 1: Open Telemetry as Bridge (RECOMMENDED) -->
-        <!-- Open Telemetry
-            - Simplified Observability (metrics, logs, and traces) -->
+        <!--        &lt;!&ndash; OPTION 1: Open Telemetry as Bridge (RECOMMENDED) &ndash;&gt;-->
+        <!--        &lt;!&ndash; Open Telemetry-->
+        <!--            - Simplified Observability (metrics, logs, and traces) &ndash;&gt;-->
 
-        <dependency>
-            <groupId>io.micrometer</groupId>
-            <artifactId>micrometer-tracing-bridge-otel</artifactId>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>io.micrometer</groupId>-->
+        <!--            <artifactId>micrometer-tracing-bridge-otel</artifactId>-->
+        <!--        </dependency>-->
 
-        <dependency>
-            <groupId>io.opentelemetry</groupId>
-            <artifactId>opentelemetry-exporter-zipkin</artifactId>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>io.opentelemetry</groupId>-->
+        <!--            <artifactId>opentelemetry-exporter-zipkin</artifactId>-->
+        <!--        </dependency>-->
 
-        <!-- COMMON CHANGES + -->
-        <!-- Enables tracing of REST API calls made using Feign - V3 ONLY-->
-        <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-micrometer</artifactId>
-        </dependency>
+        <!--        &lt;!&ndash; COMMON CHANGES + &ndash;&gt;-->
+        <!--        &lt;!&ndash; Enables tracing of REST API calls made using Feign - V3 ONLY&ndash;&gt;-->
+        <!--        <dependency>-->
+        <!--            <groupId>io.github.openfeign</groupId>-->
+        <!--            <artifactId>feign-micrometer</artifactId>-->
+        <!--        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -9,10 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.env.Environment;
 
 @SpringBootApplication
-public class ApiGatewayApplication implements CommandLineRunner{
+public class ApiGatewayApplication implements CommandLineRunner {
 
     private static final Logger log = LoggerFactory.getLogger(ApiGatewayApplication.class);
-    
+
     @Autowired
     Environment environment;
 

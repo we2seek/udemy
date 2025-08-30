@@ -1,0 +1,83 @@
+services:
+  naming-server:
+    build:
+      context: ./naming-server
+      dockerfile: Dockerfile
+    image: we2seek/naming-server:latest
+    mem_limit: 1024m
+    ports:
+      - "8761:8761"
+    networks:
+      - currency-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8761/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+
+  api-gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    image: we2seek/api-gateway:latest
+    mem_limit: 1024m
+    ports:
+      - "8765:8765"
+    networks:
+      - currency-network
+    depends_on:
+      - naming-server
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://naming-server:8761/eureka
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8765/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+
+  currency-exchange:
+    build:
+      context: ./currency-exchange-service
+      dockerfile: Dockerfile
+    image: we2seek/currency-exchange-service:latest
+    mem_limit: 1024m
+    ports:
+      - "8000:8000"
+    networks:
+      - currency-network
+    depends_on:
+      - api-gateway
+      - naming-server
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://naming-server:8761/eureka
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+  
+  currency-conversion:
+    build:
+      context: ./currency-conversion-service
+      dockerfile: Dockerfile
+    image: we2seek/currency-conversion-service:latest
+    mem_limit: 1024m
+    ports:
+      - "8100:8100"
+    networks:
+      - currency-network
+    depends_on:
+      - api-gateway
+      - naming-server
+      - currency-exchange
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://naming-server:8761/eureka
+      currency.exchange.service.url: http://api-gateway:8765
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8100/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+
+networks:
+  currency-network:

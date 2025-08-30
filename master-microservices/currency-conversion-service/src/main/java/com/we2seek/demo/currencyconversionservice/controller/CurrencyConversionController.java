@@ -4,12 +4,15 @@ import com.we2seek.demo.currencyconversionservice.dto.CurrencyConversion;
 import com.we2seek.demo.currencyconversionservice.dto.CurrencyConversionProxy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 @RestController
 public class CurrencyConversionController {
@@ -18,13 +21,19 @@ public class CurrencyConversionController {
 
     private final RestTemplate restTemplate;
     private final CurrencyConversionProxy currencyConversionProxy;
+    private final String url;
 
     public CurrencyConversionController(
             RestTemplate restTemplate,
-            CurrencyConversionProxy currencyConversionProxy
-    ) {
+            CurrencyConversionProxy currencyConversionProxy,
+            @Value("${currency.exchange.service.url}") String baseUrlStr
+    ) throws MalformedURLException {
         this.restTemplate = restTemplate;
         this.currencyConversionProxy = currencyConversionProxy;
+        this.url = new URL(
+                new URL(baseUrlStr),
+                "/currency-exchange/from/{from}/to/{to}")
+                .toString();
     }
 
     @GetMapping("/currency-conversion/from/{from}/to/{to}/quantity/{quantity}")
@@ -33,12 +42,7 @@ public class CurrencyConversionController {
             @PathVariable String to,
             @PathVariable BigDecimal quantity
     ) {
-        CurrencyConversion c = restTemplate.getForObject(
-                "http://localhost:8765/currency-exchange/from/{from}/to/{to}",
-                CurrencyConversion.class,
-                from,
-                to
-        );
+        CurrencyConversion c = restTemplate.getForObject(url, CurrencyConversion.class, from, to);
 
         if (c == null) {
             return null;
